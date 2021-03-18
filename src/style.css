@@ -1,0 +1,123 @@
+body {
+  background-color: #f6f4e6;
+  font-family: "Architects Daughter", cursive;
+  font-weight: 600;
+}
+
+h1,
+h2,
+.temperature,
+.low-temp {
+  color: #41444b;
+}
+
+h1 {
+  font-size: 62px;
+  padding-left: 12px;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 28px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 24px;
+  color: #52575d;
+}
+
+.selected-scale {
+  font-size: 150px;
+}
+
+.unselected-scale:hover {
+  color: #000000;
+  cursor: pointer;
+}
+
+.card {
+  box-shadow: 5px 5px 8px 5px rgb(0 0 0 / 10%);
+  margin: 24px 120px;
+  border: 3px solid #41444b;
+  background: #ffffff;
+}
+
+.favorite-button,
+.fun-description,
+.weather-details,
+.time,
+.week-day {
+  color: #52575d;
+}
+
+.card-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #41444b;
+}
+
+.change-city-text {
+  border: 2px solid #52575d;
+}
+
+.fun-description,
+.time,
+.temperature,
+.week-day {
+  text-align: center;
+}
+
+form,
+div.dropdown {
+  display: inline;
+}
+
+div.city-search {
+  text-align: right;
+}
+
+a.favorite-button {
+  padding: 7px 0 7px 7px;
+}
+
+h3.current-weather {
+  padding-left: 12px;
+}
+
+p.weather-details {
+  font-weight: 500;
+  text-align: right;
+  padding-right: 34px;
+  font-size: 18px;
+}
+
+.card.hourly-weather,
+.card.daily-weather {
+  padding: 10px;
+}
+
+.change-city-button {
+  border-color: #52575d;
+  color: #52575d;
+  background-color: #f6f4e6;
+}
+
+.weather-image img {
+  width: 70%;
+  display: block;
+  margin: 0 auto;
+}
+
+.weather-image.current-weather {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+.weather-image.daily {
+  width: 80%;
+}
+
+div.second-row {
+  margin-top: 48px;
+}
