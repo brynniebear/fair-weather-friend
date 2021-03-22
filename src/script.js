@@ -1,49 +1,78 @@
-//Week 5 Additions
-//Part 1: When a user searches for a city (example: New York), 
-//it should display the name of the city on the result page and the current temperature of the city.
+//Search Engine using OpenWeather API
+//display current weather details for search city
 
-function changeTemp(newWeather) {
+function displayWeather(newWeather) {
+  console.log(newWeather);
+  //curent temp
   let temp = newWeather.data.main.temp
   temp = Math.round(temp);
-  let currentTemp = document.querySelector("#current-temperature");
-  currentTemp.innerHTML = temp;
+  let cityTemp = document.querySelector("#current-temperature");
+  cityTemp.innerHTML = temp;
+
+  //city name
+  let cityName = document.querySelector("h1");
+  cityName.innerHTML = `${newWeather.data.name}`;
+
+  //weather description
+  let weatherDescription = newWeather.data.weather[0].description;
+  let description = document.querySelector("#current-description");
+  description.innerHTML = weatherDescription;  
+  
+  //wind speed
+  let cityWindSpeed = Math.round((newWeather.data.wind.speed) * 3.6);
+  let windSpeed = document.querySelector("#wind-speed");
+  windSpeed.innerHTML = cityWindSpeed;
+
+  //humidity
+  let cityHumidity = newWeather.data.main.humidity;
+  let humidity = document.querySelector("#humidity");
+  humidity.innerHTML = cityHumidity;
+
+  //friend image
+  //let mainWeatherDescription = newWeather.data.weather[0].main;
+  //OR
+  //let mainWeatherDescription = newWeather.data.weather[0].icon;
+
 }
 
-function getNewCityTemp(result) {
-  let city = result;
-  let apiKey = ``;
-  let units = `metric`
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-  axios.get(apiUrl).then(changeTemp);
-}
 
-function selectNewCity(event) {
+function searchCity(event) {
   event.preventDefault();
-  let newCityInput = document.querySelector(".change-city-text");
-  let currentCity = document.querySelector("h1");
-  currentCity.innerHTML = `${newCityInput.value}`;
-  getNewCityTemp(newCityInput.value);
+  let cityInput = document.querySelector("#change-city-text");
+  let searchCity = cityInput.value;
+  let units = `metric`;  
+  let apiKey = `0b3b5277b18a1568b6ccacadee647a9b`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayWeather);
 }
 
 let searchCityForm = document.querySelector("#city-search-form");
-searchCityForm.addEventListener("submit", selectNewCity);
+searchCityForm.addEventListener("submit", searchCity);
 
-//Part 2: Add a Current Location button. 
-//When clicking on it, it uses the Geolocation API to get your GPS coordinates 
-//and display and the city and current temperature using the OpenWeather API.
-function getCityName(result) {
-  let currentCityName = result.data.name;
-  let currentCity = document.querySelector("h1");
-  currentCity.innerHTML = `${currentCityName}`;
-  getNewCityTemp(currentCityName);
+
+//Default City - Vancouver
+
+function displayDefaultCity(city) {
+  let units = `metric`;
+  let apiKey = `0b3b5277b18a1568b6ccacadee647a9b`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayWeather);
 }
+
+displayDefaultCity(`Vancouver`);
+
+
+//Current Location Button
+//display current location and weather using navigator
+//links to Search Engine functions
 
 function getLocation(result) {
   let latitude = result.coords.latitude;
   let longitude = result.coords.longitude;
-  let apiKey = ``;
-  let apiUrlLatLon = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`
-  axios.get(apiUrlLatLon).then(getCityName);
+  let units = `metric`;
+  let apiKey = `0b3b5277b18a1568b6ccacadee647a9b`;
+  let apiUrlLatLon = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`
+  axios.get(apiUrlLatLon).then(displayWeather);
 }
 
 function accessNavigator() {
@@ -54,8 +83,7 @@ let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", accessNavigator);
 
 
-//Week 4 Additions
-//Part 1: In your project, display the current date and time using JavaScript: Tuesday 16:00
+//Display the current date and time
 
 function displayCurrentDay() {
   let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -66,7 +94,13 @@ function displayCurrentDay() {
 
 function displayCurrentTime() {
   let currentHours = currentTimeAndDate.getHours();
+  if (currentHours < 10) {
+    currentHours = `0${currentHours}`;
+  }
   let currentMinutes = currentTimeAndDate.getMinutes();
+  if (currentMinutes < 10) {
+    currentMinutes = `0${currentMinutes}`;
+  }
   let displayTime = document.querySelector("#current-time");
   displayTime.innerHTML = `${currentHours}:${currentMinutes}`;
 }
@@ -75,19 +109,13 @@ let currentTimeAndDate = new Date();
 displayCurrentDay();
 displayCurrentTime();
 
-//Part 2: Add a search engine, when searching for a city (i.e. Paris), 
-//display the city name on the page after the user submits the form.
 
-//see Week 5:Part 1
-
-//Part 3: Display a fake temperature (i.e 17) in Celsius and add a link to convert it to Fahrenheit. 
-//When clicking on it, it should convert the temperature to Fahrenheit. 
-//When clicking on Celsius, it should convert it back to Celsius.
+//Convert temperature: Celsius and Fahrenheit
 
 function displayCelcius (event) {
   let currentTemp = document.querySelector("#current-temperature");
   
-  let celciusTemp = (currentTemp.innerHTML - 32) * 5 / 9;
+  let celciusTemp = (Number(currentTemp.innerHTML) - 32) * 5 / 9;
   celciusTemp = Math.round(celciusTemp);
   currentTemp.innerHTML = `${celciusTemp}`;
 
@@ -102,7 +130,7 @@ function displayCelcius (event) {
 
 function displayFahrenheit (event) {
   let currentTemp = document.querySelector("#current-temperature");
-  let fahrenheitTemp = (currentTemp.innerHTML * 9 / 5) + 32;
+  let fahrenheitTemp = (Number(currentTemp.innerHTML) * 9 / 5) + 32;
   fahrenheitTemp = Math.round(fahrenheitTemp);
   currentTemp.innerHTML = `${fahrenheitTemp}`;
 
@@ -114,7 +142,6 @@ function displayFahrenheit (event) {
   scaleCelcius.classList.remove("selected-scale");
   scaleCelcius.classList.add("unselected-scale");
 }
-
 
 let scaleCelcius = document.querySelector("#celcius");
 let scaleFahrenheit = document.querySelector("#fahrenheit");

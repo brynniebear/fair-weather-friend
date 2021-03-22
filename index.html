@@ -20,7 +20,7 @@
     <div class="card current-weather">
       <div class="card-header city-search">
         <form id=city-search-form>
-          <input type="search" placeholder="City name" class="change-city-text" autocomplete="off" autofocus="on" />
+          <input type="search" placeholder="City name" class="change-city-text" id="change-city-text" autocomplete="off" autofocus="on" />
           <input type="submit" class="btn btn-light change-city-button" value="Change City" />
         </form>
         <button class="btn btn-light change-city-button" id="current-location-button">
@@ -39,14 +39,6 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-12">
-            <h3 class="current-weather">
-              <span id="current-day">Sunday</span>
-              ,
-              <span id="current-time">8:00</span>
-              , Cloudy
-            </h3>
-          </div>
           <div class="col-6">
             <img src="images/head-in-the-clouds.png" alt="Cloud" class="weather-image current-weather">
           </div>
@@ -66,12 +58,18 @@
           </div>
           <div class="col-6">
             <p class="weather-details">
-              Precipitation: 67%
+              <span calss="current-weather" id="current-description"></span>
+              </br>
+              Wind: <span id="wind-speed"></span>km/h
+              <br />              
+              Humidity: <span id="humidity"></span>%
               <br />
-              Humidity: 94%
-              <br />
-              Wind: 14kn/h
-            </p>
+            </p>              
+            <h3 class="current-weather">
+              <span id="current-day"></span>
+              ,
+              <span id="current-time"></span>
+            </h3>
           </div>
         </div>
       </div>
