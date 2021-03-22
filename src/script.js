@@ -10,7 +10,7 @@ function displayWeather(newWeather) {
   cityTemp.innerHTML = temp;
 
   //city name
-  let cityName = document.querySelector("h1");
+  let cityName = document.querySelector("#city-name");
   cityName.innerHTML = `${newWeather.data.name}`;
 
   //weather description
