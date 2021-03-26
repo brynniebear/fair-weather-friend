@@ -1,6 +1,44 @@
 //Search Engine using OpenWeather API
 //display current weather details for search city
 
+function displayImage(weatherIcon) {
+  let currentWeatherImage = document.querySelector("#current-weather-image");
+  currentWeatherImage.removeAttribute("src");
+  currentWeatherImage.removeAttribute("alt");
+  let imageDescription = document.querySelector("#image-description");
+  let imageCode = weatherIcon;
+  if (imageCode === `01d` || imageCode === `01n`) {
+    currentWeatherImage.setAttribute("src", "images/you-are-a-ray-of-sunshine.png");
+    currentWeatherImage.setAttribute("alt","A sun made of stick-people");
+    imageDescription.innerHTML = `I'm a ray of sunshine!`;
+  }
+  if (imageCode === `02d` || imageCode === `02n`) {
+    currentWeatherImage.setAttribute("src", "images/a-moment-in-the-sun.png");
+    currentWeatherImage.setAttribute("alt","A stick-person posing for a photo");
+    imageDescription.innerHTML = `I'll have my moment in the sun!`;
+  }
+  if (imageCode === `03d` || imageCode === `03n`|| imageCode === `04d` || imageCode === `04n`) {
+    currentWeatherImage.setAttribute("src", "images/head-in-the-clouds.png");
+    currentWeatherImage.setAttribute("alt","A stick-person with its head in clouds");
+    imageDescription.innerHTML = `I've got my head in the clouds.`;
+  }
+  if (imageCode === `09d` || imageCode === `09n`|| imageCode === `10d` || imageCode === `10n`) {
+    currentWeatherImage.setAttribute("src", "images/singing-in-the-rain.png");
+    currentWeatherImage.setAttribute("alt","A stick-person holding an umbrella with music notes falling");
+    imageDescription.innerHTML = `I'm singing in the rain, just singing...`;
+  }
+  if (imageCode === `13d` || imageCode === `13n`) {
+    currentWeatherImage.setAttribute("src", "images/a-blanket-of-snow.png");
+    currentWeatherImage.setAttribute("alt","A stick-person with a blanket covered in snowflakes");
+    imageDescription.innerHTML = `I'm covered in a blanket of snow.`;
+  }
+  if (imageCode === `11d` || imageCode === `11n`|| imageCode === `50d` || imageCode === `50n`) {
+    currentWeatherImage.setAttribute("src", "images/fair-weather-friend.png");
+    currentWeatherImage.setAttribute("alt","A smiling stick-person");
+    imageDescription.innerHTML = `Hello! I'm your fair weather friend!`;
+  }
+}
+
 function displayWeather(newWeather) {
   console.log(newWeather);
   //curent temp
@@ -29,9 +67,11 @@ function displayWeather(newWeather) {
   humidity.innerHTML = cityHumidity;
 
   //friend image
-  //let mainWeatherDescription = newWeather.data.weather[0].main;
-  //OR
-  //let mainWeatherDescription = newWeather.data.weather[0].icon;
+  //openweather icon url: http://openweathermap.org/img/wn/10d@2x.png
+  let weatherIcon = newWeather.data.weather[0].icon;
+  if (newWeather.data.name !== `Vancouver`) {
+    displayImage(weatherIcon);
+  }
 
   //return units button to celsius
     let units = document.querySelector("#units");
