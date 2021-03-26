@@ -33,6 +33,11 @@ function displayWeather(newWeather) {
   //OR
   //let mainWeatherDescription = newWeather.data.weather[0].icon;
 
+  //return units button to celsius
+    let units = document.querySelector("#units");
+    units.innerHTML = '°F';
+    let tempUnits = document.querySelector("#selected-units");
+    tempUnits.innerHTML = '°C';
 }
 
 
@@ -109,42 +114,27 @@ let currentTimeAndDate = new Date();
 displayCurrentDay();
 displayCurrentTime();
 
-
-//Convert temperature: Celsius and Fahrenheit
-
-function displayCelcius (event) {
+//Convert Units Button: Celsius and Fahrenheit
+function changeUnits() {
+  let unitsButton = document.querySelector("#units");
   let currentTemp = document.querySelector("#current-temperature");
-  
-  let celciusTemp = (Number(currentTemp.innerHTML) - 32) * 5 / 9;
-  celciusTemp = Math.round(celciusTemp);
-  currentTemp.innerHTML = `${celciusTemp}`;
+  let tempUnits = document.querySelector("#selected-units");
 
-  let scaleCelcius = document.querySelector("#celcius");
-  scaleCelcius.classList.remove("unselected-scale");
-  scaleCelcius.classList.add("selected-scale");
+  if (unitsButton.innerHTML === `°F`) {
+    let fahrenheitTemp = (Number(currentTemp.innerHTML) * 9 / 5) + 32;
+    fahrenheitTemp = Math.round(fahrenheitTemp);
+    currentTemp.innerHTML = `${fahrenheitTemp}`;
+    unitsButton.innerHTML = '°C';
+    tempUnits.innerHTML = `°F`;
 
-  let scaleFahrenheit = document.querySelector("#fahrenheit");
-  scaleFahrenheit.classList.add("unselected-scale");
-  scaleFahrenheit.classList.remove("selected-scale");
+  } else {
+    let celciusTemp = (Number(currentTemp.innerHTML) - 32) * 5 / 9;
+    celciusTemp = Math.round(celciusTemp);
+    currentTemp.innerHTML = `${celciusTemp}`;
+    unitsButton.innerHTML = '°F';
+    tempUnits.innerHTML = '°C';
+  }
 }
 
-function displayFahrenheit (event) {
-  let currentTemp = document.querySelector("#current-temperature");
-  let fahrenheitTemp = (Number(currentTemp.innerHTML) * 9 / 5) + 32;
-  fahrenheitTemp = Math.round(fahrenheitTemp);
-  currentTemp.innerHTML = `${fahrenheitTemp}`;
-
-  let scaleFahrenheit = document.querySelector("#fahrenheit");
-  scaleFahrenheit.classList.add("selected-scale");
-  scaleFahrenheit.classList.remove("unselected-scale");
-
-  let scaleCelcius = document.querySelector("#celcius");
-  scaleCelcius.classList.remove("selected-scale");
-  scaleCelcius.classList.add("unselected-scale");
-}
-
-let scaleCelcius = document.querySelector("#celcius");
-let scaleFahrenheit = document.querySelector("#fahrenheit");
-
-scaleCelcius.addEventListener("click", displayCelcius);
-scaleFahrenheit.addEventListener("click", displayFahrenheit);
+let unitButton = document.querySelector("#unit-button");
+unitButton.addEventListener("click", changeUnits);

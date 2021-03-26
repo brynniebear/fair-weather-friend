@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <title>Fair Weather Friend</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -26,8 +26,8 @@
         <button class="btn btn-light button" id="current-location-button">
           Current Location
         </button>
-        <button class="btn btn-light button" id="current-location-button">
-          °F
+        <button class="btn btn-light button" id="unit-button">
+          <span id="units">°F</span>
         </button>
       </div>
       <div class="card-body">
@@ -37,10 +37,8 @@
           </div>
           <div class="col-6">
             <h2>
-              <span class="selected-scale" id="current-temperature"></span>
-              <span href="#" class="selected-scale" id="celcius">°C</span>
-              /
-              <span href="#" class="unselected-scale" id="fahrenheit">°F</span>
+              <span id="current-temperature"></span>
+              <span id="selected-units">°C</span>
             </h2>
           </div>
           <div class="col-6">
@@ -51,18 +49,19 @@
           </div>
           <div class="col-6">
             <p class="weather-details">
-              <span calss="current-weather" id="current-description"></span>
+              <span id="current-description"></span>
               </br>
               Wind: <span id="wind-speed"></span>km/h
               <br />              
               Humidity: <span id="humidity"></span>%
               <br />
             </p>              
-            <h3 class="current-weather">
+            <h4 class="current-weather">
+              Last updated: 
               <span id="current-day"></span>
               ,
               <span id="current-time"></span>
-            </h3>
+            </h4>
           </div>
         </div>
       </div>

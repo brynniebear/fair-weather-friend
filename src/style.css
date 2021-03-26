@@ -6,6 +6,7 @@ body {
 
 h1,
 h2,
+h3,
 footer,
 .temperature,
 .low-temp {
@@ -19,12 +20,12 @@ h1 {
 }
 
 h2 {
-  font-size: 28px;
+  font-size: 80px;
   text-align: center;
 }
 
-h3 {
-  font-size: 24px;
+h4 {
+  font-size: 20px;
   color: #52575d;
   text-align: right;
   padding: 0 32px;
@@ -32,15 +33,6 @@ h3 {
 
 footer {
   text-align: center;
-}
-
-.selected-scale {
-  font-size: 150px;
-}
-
-.unselected-scale:hover {
-  color: #000000;
-  cursor: pointer;
 }
 
 .card {
@@ -131,4 +123,12 @@ p.weather-details {
 
 div.second-row {
   margin-top: 48px;
+}
+
+#current-temperature {
+  font-size: 150px;
+}
+
+#current-description {
+  text-transform: capitalize;
 }
