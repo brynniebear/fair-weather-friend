@@ -186,6 +186,14 @@ function displayWeather(newWeather) {
   let weatherIcon = newWeather.data.weather[0].icon;
   if (newWeather.data.name !== `Vancouver`) {
     displayImage(weatherIcon);
+  } else {
+    let currentWeatherImage = document.querySelector("#current-weather-image");
+    currentWeatherImage.removeAttribute("src");
+    currentWeatherImage.removeAttribute("alt");
+    let imageDescription = document.querySelector("#image-description");
+    currentWeatherImage.setAttribute("src", "images/fair-weather-friend.png");
+    currentWeatherImage.setAttribute("alt","A smiling stick-person");
+    imageDescription.innerHTML = `Hello! I'm your fair weather friend!`;
   }
 
   //return units button to celsius
