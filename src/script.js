@@ -1,8 +1,4 @@
-//Search Engine using OpenWeather API
-//display current weather details for search city
-//display custom weather images
-//display forcast
-//get day and time: forecasts
+//Day/Time
 
 function formatDay(time) {
   let date = new Date(time);
@@ -23,6 +19,8 @@ function formatTime(time) {
   }
   return `${hours}:${minutes}`;
 }
+
+//Hourly Forecast
 
 function displayHourlyForecast(results) {
   console.log(results);
@@ -48,6 +46,9 @@ function displayHourlyForecast(results) {
     `<div class="col-2 hourly temperature">
       <img src="${weatherIcon}" alt="${weatherDescription}" class="hourly weather-image">
       ${temp}°
+      <div class=" daily main-description">
+      ${weatherDescription}
+      </div>
       <div class="hourly time">
         ${formatTime(forecast.dt * 1000)}
       </div>
@@ -56,6 +57,8 @@ function displayHourlyForecast(results) {
   }
 
 }
+
+//Daily Forecast
 
 function displayDailyForecast (results) {
   let  dailyForecast = document.querySelector("#daily-forecast");
@@ -68,7 +71,7 @@ function displayDailyForecast (results) {
   let weatherIcon = null;
   let weatherDescription = null;
 
-  for (let index = 0; index < 5; index++) {
+  for (let index = 1; index < 6; index++) {
     forecast = results.data.daily[index];
 
     maxTemp = Math.round(forecast.temp.max);
@@ -81,12 +84,17 @@ function displayDailyForecast (results) {
     `<div class="col-sm daily temperature">
       <img src="${weatherIcon}" alt="${weatherDescription}" class="daily weather-image" />
       ${maxTemp}°<span class="low-temp">/${minTemp}°</span>
+      <div class=" daily main-description">
+      ${weatherDescription}
+      </div>
       <div class="daily week-day">
       ${formatDay(forecast.dt * 1000)}
       </div>
     </div>`;
   }
 }
+
+//Custom Weather Image
 
 function displayImage(weatherIcon) {
   let currentWeatherImage = document.querySelector("#current-weather-image");
@@ -126,6 +134,8 @@ function displayImage(weatherIcon) {
   }
 }
 
+//Current Weather Details
+
 function displayWeather(newWeather) {
   console.log(newWeather);
   //curent temp
@@ -144,6 +154,14 @@ function displayWeather(newWeather) {
   let displayTime = document.querySelector("#current-time");
   displayTime.innerHTML = formatTime(newWeather.data.dt * 1000);
   
+  //max and min temperatures
+  let max = Math.round(newWeather.data.main.temp_max);
+  let min = Math.round(newWeather.data.main.temp_min);
+  let maxTemp = document.querySelector("#max-temp");
+  let minTemp = document.querySelector("#min-temp");
+  maxTemp.innerHTML = `${max}`;
+  minTemp.innerHTML = `${min}`;
+
   //weather description
   let weatherDescription = newWeather.data.weather[0].description;
   let description = document.querySelector("#current-description");
@@ -181,6 +199,7 @@ function displayWeather(newWeather) {
   axios.get(forecastUrl).then(displayHourlyForecast);
 }
 
+//City Search Engine using OpenWeather API
 
 function searchCity(event) {
   event.preventDefault();
@@ -192,11 +211,7 @@ function searchCity(event) {
   axios.get(apiUrl).then(displayWeather);
 }
 
-let searchCityForm = document.querySelector("#city-search-form");
-searchCityForm.addEventListener("submit", searchCity);
-
-
-//Default City - Vancouver
+//Default City: Vancouver
 
 function displayDefaultCity(city) {
   let units = `metric`;
@@ -205,12 +220,7 @@ function displayDefaultCity(city) {
   axios.get(apiUrl).then(displayWeather);
 }
 
-displayDefaultCity(`Vancouver`);
-
-
-//Current Location Button
-//display current location and weather using navigator
-//links to Search Engine functions
+//Current Location Button: display current location and weather using navigator
 
 function getLocation(result) {
   let latitude = result.coords.latitude;
@@ -224,9 +234,6 @@ function getLocation(result) {
 function accessNavigator() {
   navigator.geolocation.getCurrentPosition(getLocation);
 }
-
-let currentLocationButton = document.querySelector("#current-location-button");
-currentLocationButton.addEventListener("click", accessNavigator);
 
 //Convert Units Button: Celsius and Fahrenheit
 function changeUnits() {
@@ -249,6 +256,14 @@ function changeUnits() {
     tempUnits.innerHTML = '°C';
   }
 }
+
+displayDefaultCity(`Vancouver`);
+
+let searchCityForm = document.querySelector("#city-search-form");
+searchCityForm.addEventListener("submit", searchCity);
+
+let currentLocationButton = document.querySelector("#current-location-button");
+currentLocationButton.addEventListener("click", accessNavigator);
 
 let unitButton = document.querySelector("#unit-button");
 unitButton.addEventListener("click", changeUnits);
