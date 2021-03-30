@@ -111,6 +111,10 @@ p.weather-details {
   margin: 0 auto;
 }
 
+.hourly.temperature {
+  padding-bottom: 15px;
+}
+
 .weather-image.current-weather {
   width: 50%;
   display: block;
