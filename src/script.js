@@ -45,8 +45,10 @@ function displayHourlyForecast(results) {
     hourlyForecast.innerHTML +=
     `<div class="col-2 hourly temperature">
       <img src="${weatherIcon}" alt="${weatherDescription}" class="hourly weather-image">
-      ${temp}°
-      <div class=" daily main-description">
+      <div class="hourly temperature">
+      <span id="hourly-temp-${index}">${temp}</span>°
+      </div>
+      <div class=" hourly main-description">
       ${weatherDescription}
       </div>
       <div class="hourly time">
@@ -83,7 +85,9 @@ function displayDailyForecast (results) {
     dailyForecast.innerHTML += 
     `<div class="col-sm daily temperature">
       <img src="${weatherIcon}" alt="${weatherDescription}" class="daily weather-image" />
-      ${maxTemp}°<span class="low-temp">/${minTemp}°</span>
+      <div class="daily temperature">
+      <span class="daily max-temp" id="daily-max-temp-${index}">${maxTemp}</span>°/<span class="daily min-temp" id="daily-min-temp-${index}">${minTemp}</span>°
+      </div>
       <div class=" daily main-description">
       ${weatherDescription}
       </div>
@@ -236,25 +240,95 @@ function accessNavigator() {
 }
 
 //Convert Units Button: Celsius and Fahrenheit
+
 function changeUnits() {
   let unitsButton = document.querySelector("#units");
   let currentTemp = document.querySelector("#current-temperature");
   let tempUnits = document.querySelector("#selected-units");
+  let maxTemp = document.querySelector("#max-temp");
+  let minTemp = document.querySelector("#min-temp");
 
   if (unitsButton.innerHTML === `°F`) {
+    //current temperature
     let fahrenheitTemp = (Number(currentTemp.innerHTML) * 9 / 5) + 32;
     fahrenheitTemp = Math.round(fahrenheitTemp);
     currentTemp.innerHTML = `${fahrenheitTemp}`;
-    unitsButton.innerHTML = '°C';
+    maxTemp.innerHTML = `${Math.round(maxTemp.innerHTML * 9 / 5 + 32)}`;
+    minTemp.innerHTML = `${Math.round(minTemp.innerHTML * 9 / 5 + 32)}`;
+
+    //hourly forecast
+    document.querySelector("#hourly-temp-1").innerHTML = `${Math.round(document.querySelector("#hourly-temp-1").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#hourly-temp-2").innerHTML = `${Math.round(document.querySelector("#hourly-temp-2").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#hourly-temp-3").innerHTML = `${Math.round(document.querySelector("#hourly-temp-3").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#hourly-temp-4").innerHTML = `${Math.round(document.querySelector("#hourly-temp-4").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#hourly-temp-5").innerHTML = `${Math.round(document.querySelector("#hourly-temp-5").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#hourly-temp-6").innerHTML = `${Math.round(document.querySelector("#hourly-temp-6").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#hourly-temp-7").innerHTML = `${Math.round(document.querySelector("#hourly-temp-7").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#hourly-temp-8").innerHTML = `${Math.round(document.querySelector("#hourly-temp-8").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#hourly-temp-9").innerHTML = `${Math.round(document.querySelector("#hourly-temp-9").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#hourly-temp-10").innerHTML = `${Math.round(document.querySelector("#hourly-temp-10").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#hourly-temp-11").innerHTML = `${Math.round(document.querySelector("#hourly-temp-11").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#hourly-temp-12").innerHTML = `${Math.round(document.querySelector("#hourly-temp-12").innerHTML * 9 / 5 + 32 )}`;
+
+    //daily forecast
+    //max
+    document.querySelector("#daily-max-temp-1").innerHTML = `${Math.round(document.querySelector("#daily-max-temp-1").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#daily-max-temp-2").innerHTML = `${Math.round(document.querySelector("#daily-max-temp-2").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#daily-max-temp-3").innerHTML = `${Math.round(document.querySelector("#daily-max-temp-3").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#daily-max-temp-4").innerHTML = `${Math.round(document.querySelector("#daily-max-temp-4").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#daily-max-temp-5").innerHTML = `${Math.round(document.querySelector("#daily-max-temp-5").innerHTML * 9 / 5 + 32 )}`;
+    //min
+    document.querySelector("#daily-min-temp-1").innerHTML = `${Math.round(document.querySelector("#daily-min-temp-1").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#daily-min-temp-2").innerHTML = `${Math.round(document.querySelector("#daily-min-temp-2").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#daily-min-temp-3").innerHTML = `${Math.round(document.querySelector("#daily-min-temp-3").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#daily-min-temp-4").innerHTML = `${Math.round(document.querySelector("#daily-min-temp-4").innerHTML * 9 / 5 + 32 )}`;
+    document.querySelector("#daily-min-temp-5").innerHTML = `${Math.round(document.querySelector("#daily-min-temp-5").innerHTML * 9 / 5 + 32 )}`;
+
+    //units button
+    unitsButton.innerHTML = `°C`;
     tempUnits.innerHTML = `°F`;
 
   } else {
+    //current temperature
     let celciusTemp = (Number(currentTemp.innerHTML) - 32) * 5 / 9;
     celciusTemp = Math.round(celciusTemp);
     currentTemp.innerHTML = `${celciusTemp}`;
-    unitsButton.innerHTML = '°F';
-    tempUnits.innerHTML = '°C';
+    maxTemp.innerHTML = `${Math.round((maxTemp.innerHTML - 32)* 5 / 9)}`;
+    minTemp.innerHTML = `${Math.round((minTemp.innerHTML - 32)* 5 / 9)}`;
+
+    //hourly forecast
+    document.querySelector("#hourly-temp-1").innerHTML = `${Math.round((document.querySelector("#hourly-temp-1").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#hourly-temp-2").innerHTML = `${Math.round((document.querySelector("#hourly-temp-2").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#hourly-temp-3").innerHTML = `${Math.round((document.querySelector("#hourly-temp-3").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#hourly-temp-4").innerHTML = `${Math.round((document.querySelector("#hourly-temp-4").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#hourly-temp-5").innerHTML = `${Math.round((document.querySelector("#hourly-temp-5").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#hourly-temp-6").innerHTML = `${Math.round((document.querySelector("#hourly-temp-6").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#hourly-temp-7").innerHTML = `${Math.round((document.querySelector("#hourly-temp-7").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#hourly-temp-8").innerHTML = `${Math.round((document.querySelector("#hourly-temp-8").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#hourly-temp-9").innerHTML = `${Math.round((document.querySelector("#hourly-temp-9").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#hourly-temp-10").innerHTML = `${Math.round((document.querySelector("#hourly-temp-10").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#hourly-temp-11").innerHTML = `${Math.round((document.querySelector("#hourly-temp-11").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#hourly-temp-12").innerHTML = `${Math.round((document.querySelector("#hourly-temp-12").innerHTML - 32)* 5 / 9 )}`;
+
+    //daily forecast
+    //max
+    document.querySelector("#daily-max-temp-1").innerHTML = `${Math.round((document.querySelector("#daily-max-temp-1").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#daily-max-temp-2").innerHTML = `${Math.round((document.querySelector("#daily-max-temp-2").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#daily-max-temp-3").innerHTML = `${Math.round((document.querySelector("#daily-max-temp-3").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#daily-max-temp-4").innerHTML = `${Math.round((document.querySelector("#daily-max-temp-4").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#daily-max-temp-5").innerHTML = `${Math.round((document.querySelector("#daily-max-temp-5").innerHTML - 32)* 5 / 9 )}`;
+    //min
+    document.querySelector("#daily-min-temp-1").innerHTML = `${Math.round((document.querySelector("#daily-min-temp-1").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#daily-min-temp-2").innerHTML = `${Math.round((document.querySelector("#daily-min-temp-2").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#daily-min-temp-3").innerHTML = `${Math.round((document.querySelector("#daily-min-temp-3").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#daily-min-temp-4").innerHTML = `${Math.round((document.querySelector("#daily-min-temp-4").innerHTML - 32)* 5 / 9 )}`;
+    document.querySelector("#daily-min-temp-5").innerHTML = `${Math.round((document.querySelector("#daily-min-temp-5").innerHTML - 32)* 5 / 9 )}`;
+
+    //units button
+    unitsButton.innerHTML = `°F`;
+    tempUnits.innerHTML = `°C`;
   }
+
 }
 
 displayDefaultCity(`Vancouver`);
