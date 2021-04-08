@@ -1,5 +1,6 @@
 body {
-  background-color: #f6f4e6;
+  background-color: #e6d1c3;
+  background-image: url("https://images.pexels.com/photos/2859169/pexels-photo-2859169.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
   font-family: "Architects Daughter", cursive;
   font-weight: 600;
 }
@@ -9,7 +10,8 @@ h2,
 h3,
 footer,
 .temperature,
-.low-temp {
+.low-temp,
+.open-source-link {
   color: #41444b;
 }
 
@@ -32,22 +34,23 @@ h4 {
   padding: 0 32px;
 }
 
-footer {
-  text-align: center;
-}
-
+footer,
 .card {
   box-shadow: 5px 5px 8px 5px rgb(0 0 0 / 10%);
   margin: 24px 120px;
-  border: 3px solid #41444b;
-  background: #ffffff;
+  border: 3px solid #52575d;
+  background: #bec9c9;
+}
+
+footer {
+  margin-bottom: 0;
+  text-align: center;
 }
 
 .card-body {
   padding: 2rem 3rem;
 }
 
-.favorite-button,
 .fun-description,
 .weather-details,
 .time,
@@ -56,8 +59,8 @@ footer {
 }
 
 .card-header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #41444b;
+  background-color: #bec9c9;
+  border-bottom: 1px solid #52575d;
 }
 
 .change-city-text {
@@ -71,6 +74,14 @@ footer {
   text-align: center;
 }
 
+.card.current-weather {
+  background: #f2f2f2;
+}
+
+.open-source-link {
+  text-decoration: none;
+}
+
 form,
 div.dropdown {
   display: inline;
@@ -78,10 +89,6 @@ div.dropdown {
 
 div.city-search {
   text-align: right;
-}
-
-a.favorite-button {
-  padding: 7px 0 7px 7px;
 }
 
 h3.current-weather {
@@ -103,7 +110,7 @@ p.weather-details {
 .button {
   border-color: #52575d;
   color: #52575d;
-  background-color: #f6f4e6;
+  background-color: #f2f2f2;
 }
 
 .weather-image img {
@@ -128,6 +135,10 @@ p.weather-details {
 
 div.second-row {
   margin-top: 48px;
+}
+
+footer p {
+  margin-top: 15px;
 }
 
 #current-temperature {
