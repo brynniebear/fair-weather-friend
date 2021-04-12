@@ -23,7 +23,6 @@ function formatTime(time) {
 //Hourly Forecast
 
 function displayHourlyForecast(results) {
-  console.log(results);
   let hourlyForecast = document.querySelector("#hourly-forecast");
   hourlyForecast.innerHTML = null;
 
@@ -141,7 +140,6 @@ function displayImage(weatherIcon) {
 //Current Weather Details
 
 function displayWeather(newWeather) {
-  console.log(newWeather);
   //curent temp
   let temp = newWeather.data.main.temp
   temp = Math.round(temp);
