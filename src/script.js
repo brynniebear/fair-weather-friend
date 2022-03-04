@@ -42,7 +42,7 @@ function displayHourlyForecast(results) {
     weatherDescription = forecast.weather[0].main;
 
     hourlyForecast.innerHTML +=
-    `<div class="col-2 hourly temperature">
+    `<div class="col-md-2 hourly temperature">
       <img src="${weatherIcon}" alt="${weatherDescription}" class="hourly weather-image">
       <div class="hourly temperature">
       <span id="hourly-temp-${index}">${temp}</span>°

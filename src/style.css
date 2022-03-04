@@ -147,3 +147,28 @@ footer p {
 #current-description {
   text-transform: capitalize;
 }
+
+@media (max-width: 992px) {
+  .card {
+    margin: 24px 20px;
+  }
+  form {
+    display: block;
+    margin: 0 auto;
+  }
+  div.city-search {
+    text-align: center;
+}
+}
+@media (max-width: 1200px) {
+  p.weather-details,
+  h4.current-weather {
+    text-align: center;
+  }
+  h1 {
+    font-size: 40px;
+  }
+  h1 {
+    font-size: 45px;
+  }
+}
